@@ -1,0 +1,6 @@
+:Cppcheck	cpp_cppcheck.txt	/*:Cppcheck*
+cpp_cppcheck	cpp_cppcheck.txt	/*cpp_cppcheck*
+cpp_cppcheck-config	cpp_cppcheck.txt	/*cpp_cppcheck-config*
+cpp_cppcheck-prerequisites	cpp_cppcheck.txt	/*cpp_cppcheck-prerequisites*
+cpp_cppcheck.txt	cpp_cppcheck.txt	/*cpp_cppcheck.txt*
+g:cpp_cppcheck_options	cpp_cppcheck.txt	/*g:cpp_cppcheck_options*

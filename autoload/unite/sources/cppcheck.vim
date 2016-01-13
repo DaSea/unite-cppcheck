@@ -48,20 +48,24 @@ let s:unite_source.hooks.on_init = function(s:SID . 'Source_Hooks_on_init')
 
 function! s:unite_source.gather_candidates(args, context)
     let l:candidates = []
+    let ftype = &filetype
+    if ('cpp' !=? ftype) && ('c' !=? ftype)
+        echo "No supported file type!"
+        return l:candidates
+    endif
+
     if !executable(g:unite_cppcheck_cmd)
         echo 'Cppcheck cannot be found. Ensure the path to cppcheck is in your PATH environment variable.'
     else
         let cmd = fnameescape(g:unite_cppcheck_cmd) . ' ' . g:unite_cppcheck_options . ' ' . expand('%:p')
         let sysret = system(cmd)
         " let sysret = vimproc#system2(cmd)
-        let l:rr = matchlist(testStr, s:regexp)
-        call append(1, testStr)
         let s:tlines = split(sysret, '[\x0]') " 以^@ 进行分割的
         for s:tline in s:tlines
             let l:res = matchlist(s:tline, s:regexp)
             if !empty(l:res)
                 call extend(l:candidates, [{
-                    \ "word": s:tline,
+                    \ "word": '['.l:res[2].'] :'.l:res[3],
                     \ "source": "tasklist",
                     \ "kind": "jump_list",
                     \ "action__path": a:context.source__cppcheck_source_path,
